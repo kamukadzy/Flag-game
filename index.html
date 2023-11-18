@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN"
+      crossorigin="anonymous"
+    />
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
+      crossorigin="anonymous"
+    ></script>
+    <title>Flag Quiz</title>
+    <style>
+      body {
+        font-family: "Arial", sans-serif;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        height: 100vh;
+        margin: 0;
+        background-color: #f8f8f8;
+      }
+
+      #flag-image {
+        width: 450px;
+        max-height: 300px;
+        margin-bottom: 20px;
+        /* border: 2px solid #333; */
+        border-radius: 5px;
+      }
+
+      #options-container {
+        display: flex;
+        gap: 10px;
+        justify-content: space-between;
+      }
+
+      .option-button {
+        padding: 10px;
+        background-color: #3498db;
+        color: #fff;
+        border: none;
+        cursor: pointer;
+        font-size: 16px;
+        border-radius: 5px;
+      }
+    </style>
+  </head>
+  <body>
+    <div>
+      <h1>Davlatni toping</h1>
+      <img id="flag-image" alt="Country Flag" />
+      <div id="options-container"></div>
+    </div>
+
+    <script>
+      const aa = document.querySelector("alert");
+      const flags = [
+        {
+          name: "Uzbekiston",
+          image:
+            "https://cdn.countryflags.com/thumbs/uzbekistan/flag-square-250.png",
+        },
+        {
+          name: "Russian",
+          image:
+            "https://cdn.countryflags.com/thumbs/russia/flag-square-250.png",
+        },
+        {
+          name: "Usa",
+          image:
+            "https://cdn.countryflags.com/thumbs/united-states-of-america/flag-square-250.png",
+        },
+        {
+          name: "China",
+          image:
+            "https://cdn.countryflags.com/thumbs/china/flag-square-250.png",
+        },
+        {
+          name: "India",
+          image:
+            "https://cdn.countryflags.com/thumbs/india/flag-square-250.png",
+        },
+        {
+          name: "Japan",
+          image:
+            "https://cdn.countryflags.com/thumbs/japan/flag-square-250.png",
+        },
+        {
+          name: "Korea",
+          image:
+            "https://cdn.countryflags.com/thumbs/south-korea/flag-square-250.png",
+        },
+        {
+          name: "Turkey",
+          image:
+            "https://cdn.countryflags.com/thumbs/turkey/flag-square-250.png",
+        },
+        {
+          name: "Mexico",
+          image:
+            "https://cdn.countryflags.com/thumbs/mexico/flag-square-250.png",
+        },
+        {
+          name: "Arab League",
+          image:
+            "https://cdn.countryflags.com/thumbs/arab-league/flag-square-250.png",
+        },
+        {
+          name: "Iran",
+          image: "https://cdn.countryflags.com/thumbs/iran/flag-square-250.png",
+        },
+        {
+          name: "Brazil",
+          image:
+            "https://cdn.countryflags.com/thumbs/brazil/flag-square-250.png",
+        },
+        {
+          name: "France",
+          image:
+            "https://cdn.countryflags.com/thumbs/france/flag-square-250.png ",
+        },
+        {
+          name: "Egypt",
+          image:
+            " https://cdn.countryflags.com/thumbs/egypt/flag-square-250.png",
+        },
+        {
+          name: "Spain",
+          image:
+            "https://cdn.countryflags.com/thumbs/spain/flag-square-250.png",
+        },
+        {
+          name: "Ukraine",
+          image:
+            "https://cdn.countryflags.com/thumbs/ukraine/flag-square-250.png",
+        },
+
+        {
+          name: "Algeria",
+          image:
+            "https://cdn.countryflags.com/thumbs/algeria/flag-square-250.png",
+        },
+        {
+          name: "Peru",
+          image: "https://cdn.countryflags.com/thumbs/peru/flag-square-250.png",
+        },
+        {
+          name: "Canada",
+          image:
+            "https://cdn.countryflags.com/thumbs/canada/flag-square-250.png",
+        },
+        {
+          name: "Yeman",
+          image:
+            "https://cdn.countryflags.com/thumbs/yemen/flag-square-250.png",
+        },
+        {
+          name: "Tunisia",
+          image:
+            " https://cdn.countryflags.com/thumbs/tunisia/flag-square-250.png",
+        },
+
+        // Qolgan flaglar...
+      ];
+
+      let correctFlag;
+
+      const fetchRandomFlag = () => {
+        const randomIndex = Math.floor(Math.random() * flags.length);
+        correctFlag = flags[randomIndex];
+        return correctFlag;
+      };
+
+      const generateOptions = () => {
+        const optionsContainer = document.getElementById("options-container");
+        optionsContainer.innerHTML = "";
+
+        const correctOption = correctFlag.name;
+        const Flag = () => {};
+        // Tasodifiy tanlangan davlat nomidan boshqa nomlarni tanlash
+        const incorrectOptions = flags
+          .filter((flag) => flag.name !== correctOption)
+          .sort(() => Math.random() - 0.9)
+          .slice(0, 3)
+          .map((flag) => flag.name);
+
+        const allOptions = [correctOption, ...incorrectOptions];
+        allOptions.sort(() => Math.random() - 0.5);
+
+        allOptions.forEach((option) => {
+          const button = document.createElement("button");
+          button.textContent = option;
+          button.classList.add("option-button");
+          button.addEventListener("click", () => handleOptionClick(option));
+          optionsContainer.appendChild(button);
+        });
+      };
+      const counter = () => {};
+      const handleOptionClick = (selectedOption) => {
+        const flagImage = document.getElementById("flag-image");
+
+        if (selectedOption === correctFlag.name) {
+          // alert("To'g'ri javob! O'yingizni davom ettiring.");
+        } else {
+          alert(aa);
+        }
+
+        // Yangi davlatni tanlash va bayroqni ko'rsatish
+        fetchRandomFlag();
+        flagImage.src = correctFlag.image;
+
+        // Yangi variantlarni generatsiya qilish
+        generateOptions();
+      };
+
+      // O'yin boshlanishi
+      fetchRandomFlag();
+      const flagImage = document.getElementById("flag-image");
+      flagImage.src = correctFlag.image;
+
+      // Birinchi variantlarni generatsiya qilish
+      generateOptions();
+    </script>
+  </body>
+</html>
